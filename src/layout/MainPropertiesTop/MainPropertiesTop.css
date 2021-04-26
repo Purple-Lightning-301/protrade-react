@@ -1,0 +1,15 @@
+.main-properties-top{
+    height: 100%;
+    background-color: #2F3240;
+    flex-direction: column;
+    align-items: center;
+}
+.warning{
+    height: 40px;
+    line-height: 40px;
+    margin-top: 44px;
+    align-items: center;
+    color: red;
+    font-style: italic;
+    font-size: 14px;
+}

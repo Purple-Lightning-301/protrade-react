@@ -1,0 +1,156 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    font-family: helvetica, arial, sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+*{
+    box-sizing: border-box;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../../assets/background.jpg);
+    background-size: 130%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.brand{
+    width: 350px;
+}
+.login-form{
+    width:350px;
+    height: 450px;
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EAE9EB;
+}
+.login-form>p{
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 25px;
+
+}
+.login-form>a{
+    text-decoration: none;
+    font-size: 14px;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 200px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.form>input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding:4px 7px 4px 7px;
+    height: 35px;
+}
+.form>input:focus{
+    border: 1px solid #E9922C;
+    outline: none;
+}
+.form>label{
+    
+}
+.type{
+    height: 1.9em;
+    border-radius: 5px;
+    border: 1px solid #BEBEC0;;
+    background-color: #EAE9EB;
+}
+.checkbox{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.checkbox>i{
+    margin-left: 5px;
+}
+.line{
+    width: 90%;
+    height:1px;
+    background-color: #BEBEC0;
+}
+button{
+    width: 200px;
+    height: 2.5em;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    outline: none;
+}
+button:active{
+    outline: none;
+}
+button>span>i{
+    margin-right: 4px;
+}
+.login-button{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background-color: #E9922C;
+}
+.login-button:hover{
+    box-shadow: 1px 1px 5px #E9922C, -1px -1px 5px #E9922C;
+}
+.login-button span a{
+    text-decoration: none;
+    color: #eee;
+}
+.signup-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #1BC656;
+}
+.signup-button:hover{
+    box-shadow: 1px 1px 5px #1BC656, -1px -1px 5px #1BC656;
+}

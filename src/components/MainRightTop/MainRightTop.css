@@ -1,0 +1,46 @@
+.command-header>ul>li>a>button{
+    background-color: #2F3240;
+    cursor: pointer;
+}
+.command-header>ul>li>a{
+    background-color: #2F3240;
+    cursor: pointer;
+    color: #E9922C;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.command-header>ul{
+    justify-content: space-around;
+}
+#date-command{
+    width: 125px;
+}
+#conditional-command{
+    width: 125px;
+}
+.command-header>ul>li{
+    justify-content:space-around;
+}
+#topright-icons{
+    width: 60px;
+}
+#topright-icon2{
+    width: 60px;
+}
+.command-menu>ul>li>a>button{
+    background-color: #131722;
+    width: 100%;
+    cursor: pointer;
+    font-weight: normal !important;
+    border-radius: 0px;
+}
+#open{
+    width: 125px;
+}
+#close{
+    width: 125px;
+}
+#properties-information{
+    justify-content: space-between;
+}

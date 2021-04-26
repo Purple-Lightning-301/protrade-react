@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Login from "../src/pages/Login/Login";
+import Header from "../src/layout/Header/Header";
+import Main from "../src/layout/Main/Main";
+import BottomLeft from "../src/components/BottomLeft/BottomLeft";
+import ProtradeHome from "../src/pages/ProtradeHome/ProtradeHome";
+import ProtradeProperties from "../src/pages/ProtradeProperties/ProtradeProperties";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+    <Header/>
+      <Switch>
+        <Route path="/tai-san">
+          <ProtradeProperties/>
+        </Route>
+        <Route path="/">
+          <ProtradeHome/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

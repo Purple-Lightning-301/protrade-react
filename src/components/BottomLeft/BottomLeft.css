@@ -1,0 +1,90 @@
+.main-left{
+	grid-template-rows: 55% 45%;
+}
+.dealing-data{
+	grid-template-rows: 1fr 30px;
+	background-color: #2F3240;
+}
+.dealing-data-content>div{
+    height: 100% !important;
+}
+.dealing-menu{
+	background-color: #131722;
+	height: 30px;
+	overflow: hidden;
+}
+.dealing-menu>*{
+	line-height: 30px;
+}
+.copy-right{
+	color: gray;
+	margin-left: 10px;
+	width: 274px;
+	flex-shrink: 0;
+}
+.fa-bar-chart{
+	font-size: 14px !important;
+}
+.fa-pie-chart{
+	font-size: 14px !important;
+}
+.chart-list{
+	margin-left:auto;
+	flex-shrink: 0;
+    width: 300px;
+}
+.chart-list>button{
+    background-color: #131722;
+
+}
+.chart-list>.active>a{
+	color: #E9922C;
+
+}
+.chart-list>li>a>button{
+	border: none !important;
+	background-color: #131722 !important;
+    color: #fff;
+    text-decoration: none;
+}
+.tradingview-widget-container{
+    width: 100%;
+    height: 100%;
+}
+.buy-price::after{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	content: "\A";
+	width: 40%;
+	background-color: #F7941D;
+	z-index: 0;
+	opacity: 0.2;
+}
+.data-right{
+	position: relative;
+}
+.sell-price::after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	content: "\A";
+	width: 60%;
+	background-color: #F7941D;
+	z-index: 0;
+	opacity: 0.2;
+}
+#VN30intraday{
+    width: 130px;
+}
+#VN30{
+    width: 62px;
+}
+#fa-bar{
+    width: 53px;
+}
+#fa-pie{
+    width: 50px;
+}

@@ -1,0 +1,59 @@
+.main-content{
+	grid-template-columns: 1fr 350px 400px;
+	height: calc(100% - 42px);
+}
+td{
+	text-align:center;
+	padding: 5px;
+}
+tr , th{
+	border-bottom: 1px solid rgb(59, 59, 59);
+}
+.space-between{
+	justify-content: space-between !important;
+}
+.space-around{
+	justify-content: space-around !important;
+}
+.text-left{
+	text-align: left;
+}
+.width-105{
+	width: 105px;
+}
+.width-50{
+	width: 50px;
+}
+.width-90{
+	width: 90px;
+}
+.width-70{
+	width: 70px;
+}
+.width-60{
+	width: 60px;
+}
+.text-orange{
+	color:#E9922C;
+}
+.text-white{
+	color: white;
+}
+.text-red{
+	color: red;
+}
+.text-green{
+	color: rgb(31, 231, 31);
+}
+.text-gray{
+	color: #CCCCCC;
+}
+.text-gem{
+	color: #00c5c5;
+}
+.text-purple{
+	color: purple;
+}
+.text-yellow{
+	color: yellow;
+}

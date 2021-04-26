@@ -1,0 +1,9 @@
+.warning{
+    height: 40px;
+    line-height: 40px;
+    margin-top: 44px;
+    align-items: center;
+    color: red;
+    font-style: italic;
+    font-size: 14px;
+}

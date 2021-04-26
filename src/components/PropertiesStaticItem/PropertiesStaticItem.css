@@ -1,0 +1,27 @@
+.properties-static-item{
+    justify-content: flex-start;
+    width: 375px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 30px;
+    border-bottom: 1px dotted #A1A1A1;
+}
+.static-type{
+    margin-left: 5px;
+}
+.static-value{
+    color: #E9922C;
+    margin-left: auto;
+}
+.fa-money-bill-alt{
+    align-items: center;
+}
+.text-orange{
+    color: #E9922C;
+}
+.text-gray{
+    color: #A1A1A1;
+}
+.text-bold{
+    font-weight: bold;
+}

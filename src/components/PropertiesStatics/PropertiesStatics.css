@@ -1,0 +1,14 @@
+.properties-statics{
+    min-width: 290px;
+    max-width: 750px;
+    grid-template-columns: 400px 400px;
+    grid-template-rows: 37px 37px 37px;
+    column-gap: 20px;
+    background-color: #2F3240;
+    margin-top: 70px;
+    height: 113px;
+    grid-auto-flow: column;
+}
+.text-orange{
+    color: #E9922C;
+}

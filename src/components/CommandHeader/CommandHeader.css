@@ -1,0 +1,154 @@
+.main-right{
+	grid-template-rows: 55% 45%;
+	background-color: #2F3240;
+	position: relative;
+}
+.command-option{
+	width: 100%;
+	position: absolute;
+	bottom: 30px;
+	border-top: 2px solid #1E222D;
+}
+.command-header>ul{
+	justify-content: space-between;
+	height: 40px;
+	align-items: center;
+}
+.command-header>ul>.active>a{
+	color: #E9922C;
+}
+.command-header>ul>li>a{
+	height: 30px;
+	border: none;
+	line-height: 30px;
+}
+.command-menu{
+	width: 100%;
+	background-color: #131722;
+}
+.command-menu>ul>li{
+	width: 33.33%;
+}
+.command-menu>ul>li>a{
+	border: none;
+	text-align: center;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+}
+
+.input-command{
+	margin-left: 10px;
+	margin-top: 20px;
+	flex-direction: column;
+}
+.row{
+	grid-template-columns: 1fr 2fr;
+}
+.row>input{
+	margin-right: 15px;
+	height: 30px;
+	align-self: center;
+	border-radius: 5px;
+	border: none;
+	padding-left: 5px;
+}
+.row>input:focus{
+	outline: none;
+}
+.row>label{
+	align-self: center;
+}
+.confirm-command{
+	margin-left: 70px;
+	margin-bottom: 20px;
+}
+.confirm-command>button{
+	width: 110px;
+	height: 30px;
+	border-radius: 5px;
+	border: none;
+	color: #eee;
+	font-weight: bold;
+}
+.confirm-command>button:focus{
+	outline: none;
+}
+.sell-btn{
+	margin-left: 5px;
+	margin-right: 5px;
+	background-color: red;
+}
+.buy-btn{
+	background-color: rgb(23, 184, 23);
+}
+#pie-chart{
+	display: none;
+}
+.dealing-chart{
+	display: none;
+}
+.dealing-button .active{
+	color: #E9922C;
+}
+.command-close{
+	display: none;
+}
+.Money-row{
+	justify-content: space-between;
+	height: 30px;
+}
+.double{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 400px;
+}
+.active{
+	background-color:#2F3240 !important;
+}
+.command-menu>ul>.active>a{
+	color: #E9922C;
+}
+.command-menu>ul>li>a{
+	font-weight: normal;
+}
+.command-close-tab{
+	display: none;
+}
+.data-left{
+	position: relative;
+}
+.buy-price::after{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	content: "\A";
+	width: 40%;
+	background-color: #F7941D;
+	z-index: 0;
+	opacity: 0.2;
+}
+.data-right{
+	position: relative;
+}
+.sell-price::after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	content: "\A";
+	width: 60%;
+	background-color: #F7941D;
+	z-index: 0;
+	opacity: 0.2;
+}
+.command-filter-close{
+    display: none;
+    height: 295px;
+    padding-top: 30px;
+    position: absolute;
+    bottom: 12px;
+    border-top: 2px solid #131722;
+}
