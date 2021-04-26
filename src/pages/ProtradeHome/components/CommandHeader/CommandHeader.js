@@ -1,5 +1,5 @@
 import React from "react";
-import "../CommandHeader/CommandHeader.css";
+import "./CommandHeader.css";
 
 function CommandHeader(props) {
   return (

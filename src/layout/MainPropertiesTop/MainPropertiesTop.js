@@ -1,7 +1,7 @@
 import React from "react";
 import "../MainPropertiesTop/MainPropertiesTop.css";
-import Warning from "../../components/Warning/Warning";
-import PropertiesContent from "../../components/PropertiesContent/PropertiesContent";
+import Warning from "../../pages/ProtradeProperties/components/Warning/Warning";
+import PropertiesContent from "../../pages/ProtradeProperties/components/PropertiesContent/PropertiesContent";
 
 function MainPropertiesTop(props) {
   return (

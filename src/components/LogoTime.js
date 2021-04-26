@@ -18,7 +18,7 @@ function LogoTime(props) {
         <div className="menu flex">
         <ul className="flex menu-list">
           <li className="navbar">
-            <NavLink exact activeClassName="active-navlink" to="/" className="tabActive">
+            <NavLink exact activeClassName="active-navlink" to="/trang-chu" className="tabActive">
               Trang chủ
             </NavLink>
           </li>
