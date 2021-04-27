@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../Header/Header.css";
 import LogoTime from "../../components/LogoTime/LogoTime";
+import {NavLink} from "react-router-dom";
+import {Cookies, useCookies} from "react-cookie";
 
 function Header(props) {
 
   const [hour, setHour] = useState("")
   const [day, setDay] = useState("")
+  const [userName, setUserName, removeUserName] = useCookies(['username']);
+  const [accessToken, setAccessToken, removeAccessToken] = useCookies(['access_token']);
+  const username = userName.username;
+  
 
   function setTime() {
     setInterval(() => {
@@ -39,6 +45,12 @@ function Header(props) {
     return x;
   }
 
+  const handlerLogout = () => {
+    console.log(username);
+    removeUserName("username");
+    removeAccessToken("access_token")
+  }
+
   return (
     <div className="header">
       <LogoTime hour={hour} day={day}/>
@@ -68,16 +80,17 @@ function Header(props) {
         <div className="user flex">
           <div className="user-button flex">
             <i className="fa fa-user" aria-hidden="true" />
-            &nbsp; Phi Long Nguyễn &nbsp;
+            &nbsp; {username} &nbsp;
             <i className="fa fa-caret-down" aria-hidden="true" />
           </div>
           <div className="dropdown-content">
-            <a href="./login.html" id="logout">
+            <NavLink to="/login" onClick={handlerLogout} id="logout">
               <span>
                 <i className="fa fa-sign-out" aria-hidden="true" />
               </span>
+              &nbsp;
               Logout
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>

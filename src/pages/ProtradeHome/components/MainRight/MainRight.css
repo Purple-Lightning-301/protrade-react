@@ -2,6 +2,7 @@
 	grid-template-rows: 55% 45%;
 	background-color: #2F3240;
 	position: relative;
+	height: calc(100% - 25px) !important;
 }
 .command-option{
 	width: 100%;
@@ -103,6 +104,7 @@
 	right: 0;
 	bottom: 0;
 	width: 400px;
+	z-index: 2;
 }
 .active{
 	background-color:#2F3240 !important;

@@ -1,12 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import "../MainRight/MainRight.css";
 import CommandHeader from "../CommandHeader/CommandHeader";
 import MainRightTop from "../MainRightTop/MainRightTop";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function MainRight(props) {
+  const [buyCode, setBuyCode] = useState("");
+  const [orderPrice, setOrderPrice] = useState();
+  const [orderQuantity, setOrderQuantity] = useState();
+  const [triggerGet, setTriggerGet] = useState(0);
+  const [accessToken, setAccessToken, removeAccessToken] = useCookies([
+    "access_token",
+  ]);
+
+  const handlerBuy = async () => {
+    console.log("clicked")
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    };
+    let url = "https://dertrial-api.vndirect.com.vn/demotrade/orders";
+    const data = {
+      side: "NB",
+      symbol: buyCode,
+      priceType: "MTL",
+      quantity: orderQuantity,
+      price: orderPrice,
+      userName: accessToken.access_token.username,
+    };
+    console.log(orderQuantity)
+    try {
+      return axios(url, {
+        method: "POST",
+        data: data,
+        config,
+      }).then((res) => {
+        if(res.status == 200){
+          console.log("Send order: OK")
+        }
+        if(res.status == 400){
+          console.log("still work")
+        }
+      }).catch((err) => {console.log(err)});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(accessToken.access_token.username);
   return (
     <div className="main-right grid">
-      <MainRightTop/>
+      <MainRightTop triggerGet = {triggerGet} />
       <div className="command-close" id="tai-san">
         <div className="command-header">
           <ul className="flex">
@@ -89,21 +136,39 @@ function MainRight(props) {
           <div className="input-command flex">
             <div className="row grid">
               <label htmlFor="HDTL">Mã HĐTL:</label>
-              <input type="text" placeholder="Mã" />
+              <input
+                type="text"
+                placeholder="Mã"
+                onChange={(e) => {
+                  setBuyCode(e.target.value);
+                }}
+              />
               <br />
             </div>
             <div className="row grid">
               <label htmlFor="HDTL">Giá đặt:</label>
-              <input type="text" placeholder="GIá" />
+              <input
+                type="text"
+                placeholder="GIá"
+                onChange={(e) => {
+                  setOrderPrice(e.target.value);
+                }}
+              />
               <br />
             </div>
             <div className="row grid">
               <label htmlFor="HDTL">Khối lượng:</label>
-              <input type="text" placeholder="KL" />
+              <input
+                type="text"
+                placeholder="KL"
+                onChange={(e) => {
+                  setOrderQuantity(e.target.value);
+                }}
+              />
               <br />
             </div>
             <div className="confirm-command">
-              <button className="buy-btn">MUA</button>
+              <button className="buy-btn" onClick={handlerBuy}>MUA</button>
               <button className="sell-btn">BÁN</button>
               <input
                 type="checkbox"

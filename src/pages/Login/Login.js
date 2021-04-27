@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import "../Login/Login.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import {useCookies} from "react-cookie";
+import { useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
 function Login(props) {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const history = useHistory();
+
+  const [tokenCookie, setTokenCookie] = useCookies([""]);
+  const [userNameCookie, setUserNameCookie] = useCookies("");
 
   async function handlerLogin(event) {
     event.preventDefault();
@@ -33,7 +39,12 @@ function Login(props) {
         config,
       }).then((res) => {
         if (res.status == 200) {
-          console.log("OK");
+          console.log("Get token: OK");
+          console.log(jwt_decode(res.data.token))
+          setTokenCookie("access_token", jwt_decode(res.data.token), {path: "/"});
+          setUserNameCookie("username", jwt_decode(res.data.token).customerName, {path: "/"});
+          console.log(tokenCookie)
+          console.log(userNameCookie.username)
           history.push("/trang-chu")
         }
       }).catch((err) => {
@@ -44,6 +55,7 @@ function Login(props) {
     } 
   }
 
+  
   return (
     <div className="container">
       <div className="brand">

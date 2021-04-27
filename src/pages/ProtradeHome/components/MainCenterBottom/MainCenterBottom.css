@@ -33,6 +33,9 @@
 .bottom-row{
 	grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
 }
+.bottom-row:first-child{
+	margin-top: 30px;
+}
 .bottom-row:nth-child(even){
 	background-color: #1E222D;
 }
@@ -43,9 +46,14 @@
 }
 .main-center-bottom{
 	border: 1px solid #131722;
+	overflow: auto;
+	position: relative;
 }
 .bottom-table{
 	grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+	position: sticky;
+	top: 0px;
+	background-color: #1E222D;
 }
 .bottom-table>div{
 	text-align: center;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertiesStatics from "../PropertiesStatics/PropertiesStatics";
+import PropertiesStatics from "../../PropertiesStatics/PropertiesStatics";
 import "./PropertiesContent.css"
 
 function PropertiesContent(props) {

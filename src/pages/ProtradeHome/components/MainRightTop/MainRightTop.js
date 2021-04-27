@@ -1,6 +1,11 @@
 import React from "react";
 import { Tabs, TabLink, TabContent } from "react-tabs-redux";
 import "../MainRightTop/MainRightTop.css";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import DayCommand from "../DayCommand/DayCommand"
 
 const styles = {
   activeLinkStyle: {
@@ -13,7 +18,44 @@ const containerStyles = {
     backgroundColor: "#2F3240",
   },
 };
+
 function MainRightTop(props) {
+  const [userAccount, setUserAccount] = useCookies("access_token");
+  const [useracc, setUseracc] = useState("");
+  const [checkDayCommand, setCheckDayCommand] = useState(false);
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
+  useEffect(()=>{getOrders()}, [props.triggerGet])
+  const getOrders = async () => {
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    };
+    let url = `https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${userAccount.access_token.username}`;
+
+    try {
+      return axios(url, {
+        method: "GET",
+        config,
+      }).then((res) => {
+        if(res.status == 200){
+          console.log(res.data);
+          if(res.data.length > 0){
+            setCheckDayCommand(true)
+          }
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    console.log(useracc);
+  };
   return (
     <Tabs activeLinkStyle={containerStyles.activeLinkStyle}>
       <TabContent for="tab1">
@@ -68,80 +110,8 @@ function MainRightTop(props) {
               </tbody>
             </table>
             <div className="cm-tab1-data">
-              <table className="text-white" style={{ width: "100%" }}>
-                <tbody>
-                  <tr>
-                    <td className="text-green">Mua</td>
-                    <td>VNF302104</td>
-                    <td>0/1</td>
-                    <td>ATC</td>
-                    <td className="text-orange flex space-between">
-                      <div className="hourglass">
-                        <i className="fa fa-hourglass" aria-hidden="true" />
-                      </div>
-                      <div className="times-circle text-red">
-                        <i className="fa fa-times-circle" aria-hidden="true" />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-green">Mua</td>
-                    <td>VNF302104</td>
-                    <td>0/1</td>
-                    <td>ATC</td>
-                    <td className="text-orange flex space-between">
-                      <div className="hourglass">
-                        <i className="fa fa-hourglass" aria-hidden="true" />
-                      </div>
-                      <div className="times-circle text-red">
-                        <i className="fa fa-times-circle" aria-hidden="true" />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-green">Mua</td>
-                    <td>VNF302104</td>
-                    <td>0/1</td>
-                    <td>ATC</td>
-                    <td className="text-orange flex space-between">
-                      <div className="hourglass">
-                        <i className="fa fa-hourglass" aria-hidden="true" />
-                      </div>
-                      <div className="times-circle text-red">
-                        <i className="fa fa-times-circle" aria-hidden="true" />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-green">Mua</td>
-                    <td>VNF302104</td>
-                    <td>0/1</td>
-                    <td>ATC</td>
-                    <td className="text-orange flex space-between">
-                      <div className="hourglass">
-                        <i className="fa fa-hourglass" aria-hidden="true" />
-                      </div>
-                      <div className="times-circle text-red">
-                        <i className="fa fa-times-circle" aria-hidden="true" />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-green">Mua</td>
-                    <td>VNF302104</td>
-                    <td>0/1</td>
-                    <td>ATC</td>
-                    <td className="text-orange flex space-between">
-                      <div className="hourglass">
-                        <i className="fa fa-hourglass" aria-hidden="true" />
-                      </div>
-                      <div className="times-circle text-red">
-                        <i className="fa fa-times-circle" aria-hidden="true" />
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            {checkDayCommand && <DayCommand/>}
+            {!checkDayCommand && <div style={{color: "#777", textAlign: "center", marginTop: "20px"}}>Chưa có lệnh nào trong sổ lệnh</div>}
             </div>
           </TabContent>
           <TabContent for="tab2">
