@@ -1,6 +1,8 @@
 import React from "react";
 
 function DayCommand(props) {
+
+  console.log(props.orderData);
   return (
     <table className="text-white" style={{ width: "100%" }}>
       <tbody>
@@ -18,7 +20,7 @@ function DayCommand(props) {
             </div>
           </td>
         </tr>
-        <tr>
+        {/* <tr>
           <td className="text-green">Mua</td>
           <td>VNF302104</td>
           <td>0/1</td>
@@ -73,7 +75,7 @@ function DayCommand(props) {
               <i className="fa fa-times-circle" aria-hidden="true" />
             </div>
           </td>
-        </tr>
+        </tr> */}
       </tbody>
     </table>
   );

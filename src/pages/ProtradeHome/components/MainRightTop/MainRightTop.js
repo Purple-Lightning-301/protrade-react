@@ -23,6 +23,7 @@ function MainRightTop(props) {
   const [userAccount, setUserAccount] = useCookies("access_token");
   const [useracc, setUseracc] = useState("");
   const [checkDayCommand, setCheckDayCommand] = useState(false);
+  const [orderData, setOrderData] = useState([]);
 
   useEffect(() => {
     getOrders();
@@ -48,6 +49,7 @@ function MainRightTop(props) {
           console.log(res.data);
           if(res.data.length > 0){
             setCheckDayCommand(true)
+            setOrderData(res.data)
           }
         }
       });
@@ -110,7 +112,7 @@ function MainRightTop(props) {
               </tbody>
             </table>
             <div className="cm-tab1-data">
-            {checkDayCommand && <DayCommand/>}
+            {checkDayCommand && <DayCommand triggerGet={props.triggerGet} orderData={orderData}/>}
             {!checkDayCommand && <div style={{color: "#777", textAlign: "center", marginTop: "20px"}}>Chưa có lệnh nào trong sổ lệnh</div>}
             </div>
           </TabContent>

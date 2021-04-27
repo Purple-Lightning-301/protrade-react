@@ -45,7 +45,7 @@ function MainRight(props) {
         if(res.status == 400){
           console.log("still work")
         }
-      }).catch((err) => {console.log(err)});
+      }).catch((err) => {console.log(err); setTriggerGet(1)});
     } catch (err) {
       console.log(err);
     }
