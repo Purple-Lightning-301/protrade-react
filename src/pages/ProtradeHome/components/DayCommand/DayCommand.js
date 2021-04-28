@@ -1,81 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import CommandRow from "./CommandRow";
 
 function DayCommand(props) {
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-  console.log(props.orderData);
+  const handlerCancelOrder = () => {
+    setConfirmDelete(true);
+  };
   return (
     <table className="text-white" style={{ width: "100%" }}>
       <tbody>
-        <tr>
-          <td className="text-green">Mua</td>
-          <td>VNF302104</td>
-          <td>0/1</td>
-          <td>ATC</td>
-          <td className="text-orange flex space-between">
-            <div className="hourglass">
-              <i className="fa fa-hourglass" aria-hidden="true" />
-            </div>
-            <div className="times-circle text-red">
-              <i className="fa fa-times-circle" aria-hidden="true" />
-            </div>
-          </td>
-        </tr>
-        {/* <tr>
-          <td className="text-green">Mua</td>
-          <td>VNF302104</td>
-          <td>0/1</td>
-          <td>ATC</td>
-          <td className="text-orange flex space-between">
-            <div className="hourglass">
-              <i className="fa fa-hourglass" aria-hidden="true" />
-            </div>
-            <div className="times-circle text-red">
-              <i className="fa fa-times-circle" aria-hidden="true" />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td className="text-green">Mua</td>
-          <td>VNF302104</td>
-          <td>0/1</td>
-          <td>ATC</td>
-          <td className="text-orange flex space-between">
-            <div className="hourglass">
-              <i className="fa fa-hourglass" aria-hidden="true" />
-            </div>
-            <div className="times-circle text-red">
-              <i className="fa fa-times-circle" aria-hidden="true" />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td className="text-green">Mua</td>
-          <td>VNF302104</td>
-          <td>0/1</td>
-          <td>ATC</td>
-          <td className="text-orange flex space-between">
-            <div className="hourglass">
-              <i className="fa fa-hourglass" aria-hidden="true" />
-            </div>
-            <div className="times-circle text-red">
-              <i className="fa fa-times-circle" aria-hidden="true" />
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td className="text-green">Mua</td>
-          <td>VNF302104</td>
-          <td>0/1</td>
-          <td>ATC</td>
-          <td className="text-orange flex space-between">
-            <div className="hourglass">
-              <i className="fa fa-hourglass" aria-hidden="true" />
-            </div>
-            <div className="times-circle text-red">
-              <i className="fa fa-times-circle" aria-hidden="true" />
-            </div>
-          </td>
-        </tr> */}
+        {props.orderData.map((order) => (
+          <CommandRow
+            side={order.side}
+            symbol={order.symbol}
+            matchedQuantity={order.matchedQuantity}
+            quantity={order.quantity}
+            orderType={order.orderType}
+            cancelable={order.cancelable}
+            orderID={order.orderID}
+            setTriggerGet={props.setTriggerGet}
+            triggerGet={props.triggerGet}
+            orderData = {props.orderData}
+            status = {order.status}
+          />
+        ))}
       </tbody>
     </table>
   );

@@ -9,10 +9,13 @@ function MainRight(props) {
   const [buyCode, setBuyCode] = useState("");
   const [orderPrice, setOrderPrice] = useState();
   const [orderQuantity, setOrderQuantity] = useState();
-  const [triggerGet, setTriggerGet] = useState(0);
+  const [triggerGet, setTriggerGet] = useState(false);
   const [accessToken, setAccessToken, removeAccessToken] = useCookies([
     "access_token",
   ]);
+
+  const [showNormal, setShowNormal] = useState(true);
+  const [showStop, setShowStop] = useState(false);
 
   const handlerBuy = async () => {
     console.log("clicked")
@@ -27,9 +30,9 @@ function MainRight(props) {
     const data = {
       side: "NB",
       symbol: buyCode,
-      priceType: "MTL",
+      priceType: orderPrice,
       quantity: orderQuantity,
-      price: orderPrice,
+      price: 0,
       userName: accessToken.access_token.username,
     };
     console.log(orderQuantity)
@@ -41,11 +44,53 @@ function MainRight(props) {
       }).then((res) => {
         if(res.status == 200){
           console.log("Send order: OK")
+          setTriggerGet(!triggerGet)
         }
         if(res.status == 400){
           console.log("still work")
+          setTriggerGet(!triggerGet)
         }
-      }).catch((err) => {console.log(err); setTriggerGet(1)});
+      }).catch((err) => {console.log(err); setTriggerGet(!triggerGet)});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  
+  const handlerSell = async () => {
+    console.log("clicked")
+    const config = {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    };
+    let url = "https://dertrial-api.vndirect.com.vn/demotrade/orders";
+    const data = {
+      side: "NS",
+      symbol: buyCode,
+      priceType: orderPrice,
+      quantity: orderQuantity,
+      price: 0,
+      userName: accessToken.access_token.username,
+    };
+    console.log(orderQuantity)
+    try {
+      return axios(url, {
+        method: "POST",
+        data: data,
+        config,
+      }).then((res) => {
+        if(res.status == 200){
+          console.log("Send order: OK")
+          setTriggerGet(!triggerGet)
+        }
+        if(res.status == 400){
+          console.log("still work")
+          setTriggerGet(!triggerGet)
+        }
+      }).catch((err) => {console.log(err); setTriggerGet(!triggerGet)});
     } catch (err) {
       console.log(err);
     }
@@ -53,47 +98,9 @@ function MainRight(props) {
   console.log(accessToken.access_token.username);
   return (
     <div className="main-right grid">
-      <MainRightTop triggerGet = {triggerGet} />
-      <div className="command-close" id="tai-san">
-        <div className="command-header">
-          <ul className="flex">
-            <li>
-              <a href="#">Thông tin tài sản</a>
-            </li>
-            <li className="flex">
-              <a href="#" className="text-orange">
-                <i className="fa fa-external-link" aria-hidden="true" />
-              </a>
-              <a href="#" className="text-orange">
-                <i className="fa fa-refresh" aria-hidden="true" />
-              </a>
-              <a
-                href="#"
-                className="text-orange minus"
-                onclick="closeButton('tablinks')"
-              >
-                <i className="fa fa-minus" aria-hidden="true" />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="Money text-white" id="tien">
-          <div className="Money-row flex">
-            <p>Tài sản ròng</p>
-            <p>40.000.000</p>
-          </div>
-          <div className="Money-row flex">
-            <p>Số dư kí quỹ</p>
-            <p>24.000.000</p>
-          </div>
-          <div className="Money-row flex">
-            <p>Thuế và phí</p>
-            <p>0</p>
-          </div>
-        </div>
-      </div>
+      <MainRightTop triggerGet = {triggerGet} setTriggerGet={setTriggerGet} />
       <div className="command-option">
-        <div className="command-filter text-white">
+        { showNormal === true ? <div className="command-filter text-white">
           <div className="radius-command">
             <input
               type="radio"
@@ -108,11 +115,10 @@ function MainRight(props) {
               id="stop"
               name="rad-cmd"
               defaultValue="command-choice"
-              onclick="showCommandFilter('command-filter','command-filter-close', 'stop')"
+              onChange={(e) => {setShowStop(true); setShowNormal(false)}}
             />
             <label
               htmlFor="stop"
-              onclick="showCommandFilter('command-filter','command-filter-close', 'stop')"
             >
               Lệnh Stop
             </label>
@@ -142,6 +148,7 @@ function MainRight(props) {
                 onChange={(e) => {
                   setBuyCode(e.target.value);
                 }}
+                required
               />
               <br />
             </div>
@@ -153,6 +160,7 @@ function MainRight(props) {
                 onChange={(e) => {
                   setOrderPrice(e.target.value);
                 }}
+                required
               />
               <br />
             </div>
@@ -164,12 +172,13 @@ function MainRight(props) {
                 onChange={(e) => {
                   setOrderQuantity(e.target.value);
                 }}
+                required
               />
               <br />
             </div>
             <div className="confirm-command">
               <button className="buy-btn" onClick={handlerBuy}>MUA</button>
-              <button className="sell-btn">BÁN</button>
+              <button className="sell-btn" onClick={handlerSell}>BÁN</button>
               <input
                 type="checkbox"
                 id="save"
@@ -179,19 +188,18 @@ function MainRight(props) {
               <label htmlFor="save">Lưu lệnh</label>
             </div>
           </div>
-        </div>
-        <div className="command-filter-close text-white flex flex-column space-around">
+        </div> : null}
+        { showStop ? <div className=" text-white flex flex-column space-around">
           <div className="radius-command">
             <input
               type="radio"
               id="normal"
               name="rad-cmd"
               defaultValue="command-choice"
-              onclick="showCommandFilter('command-filter-close','command-filter', 'normal')"
+              onChange={(e)=>{setShowNormal(true); setShowStop(!showStop)}}
             />
             <label
               htmlFor="normal"
-              onclick="showCommandFilter('command-filter-close','command-filter', 'normal')"
             >
               Lệnh thường
             </label>
@@ -202,6 +210,7 @@ function MainRight(props) {
               defaultValue="command-choice"
               defaultChecked
             />
+            {/* Radio button display command choice */}
             <label htmlFor="stop">Lệnh Stop</label>
             <input
               type="radio"
@@ -220,6 +229,7 @@ function MainRight(props) {
             />
             <label htmlFor="OSO">Lệnh OSO</label>
           </div>
+          {/* Tab when radio checked */}
           <div className="input-command flex">
             <div className="row grid">
               <label htmlFor="HDTL">Mã HĐTL:</label>
@@ -253,7 +263,7 @@ function MainRight(props) {
               <label htmlFor="save">Lưu lệnh</label>
             </div>
           </div>
-        </div>
+        </div>: null}
       </div>
     </div>
   );

@@ -44,3 +44,6 @@
 #properties-information{
     justify-content: space-between;
 }
+.command-row:nth-child(odd){
+    background-color: #1E222D;
+}

@@ -4,6 +4,16 @@
 	position: relative;
 	height: calc(100% - 25px) !important;
 }
+#tabpanel-tab1>#commands{
+	overflow: auto;
+}
+#tabpanel-tab1{
+	height: 600px;
+	overflow: auto;
+}
+.main-right>div{
+	overflow: visible;
+}
 .command-option{
 	width: 100%;
 	position: absolute;

@@ -1,5 +1,6 @@
 .main-content{
 	grid-template-columns: 1fr 350px 400px;
+	grid-template-rows: 1fr;
 	height: calc(100% - 42px);
 }
 td{

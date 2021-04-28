@@ -24,12 +24,16 @@ function MainRightTop(props) {
   const [useracc, setUseracc] = useState("");
   const [checkDayCommand, setCheckDayCommand] = useState(false);
   const [orderData, setOrderData] = useState([]);
+  const [trigger, setTrigger] = useState(0);
+
 
   useEffect(() => {
     getOrders();
   }, []);
 
-  useEffect(()=>{getOrders()}, [props.triggerGet])
+  
+
+  useEffect(()=>{getOrders(); setTrigger(!props.triggerGet)}, [props.triggerGet])
   const getOrders = async () => {
     const config = {
       headers: {
@@ -108,11 +112,12 @@ function MainRightTop(props) {
                   <td>KL Khớp</td>
                   <td>Giá</td>
                   <td>TT</td>
+                  <td colSpan={2}><p style={{color: "#2F3240"}}>"</p></td>
                 </tr>
               </tbody>
             </table>
-            <div className="cm-tab1-data">
-            {checkDayCommand && <DayCommand triggerGet={props.triggerGet} orderData={orderData}/>}
+            <div className="cm-tab1-data" style={{overflow: "auto"}}>
+            {checkDayCommand && <DayCommand triggerGet={props.triggerGet} setTriggerGet={props.setTriggerGet} orderData={orderData}/>}
             {!checkDayCommand && <div style={{color: "#777", textAlign: "center", marginTop: "20px"}}>Chưa có lệnh nào trong sổ lệnh</div>}
             </div>
           </TabContent>
