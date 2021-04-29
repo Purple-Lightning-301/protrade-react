@@ -24,6 +24,7 @@ function DayCommand(props) {
             triggerGet={props.triggerGet}
             orderData = {props.orderData}
             status = {order.status}
+            key = {order.orderID}
           />
         ))}
       </tbody>

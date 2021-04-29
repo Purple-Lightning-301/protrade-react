@@ -1,6 +1,6 @@
 .main-left{
 	grid-template-rows: 55% 45%;
-	height: calc(100% - 25px) !important;
+	height: calc(100% - 30px) !important;
 }
 .dealing-data{
 	grid-template-rows: 1fr 30px;

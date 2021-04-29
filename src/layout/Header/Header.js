@@ -3,6 +3,8 @@ import "../Header/Header.css";
 import LogoTime from "../../components/LogoTime/LogoTime";
 import {NavLink} from "react-router-dom";
 import {Cookies, useCookies} from "react-cookie";
+import useSWR from 'swr';
+import axios from "axios"
 
 function Header(props) {
 
@@ -12,14 +14,12 @@ function Header(props) {
   const [accessToken, setAccessToken, removeAccessToken] = useCookies(['access_token']);
   const username = userName.username;
   
-
   function setTime() {
     setInterval(() => {
       let date = new Date();
       let hour = formatTime(date.getHours());
       let min = formatTime(date.getMinutes());
       let sec = formatTime(date.getSeconds());
-
       let year = date.getFullYear();
       let month = formatTime(date.getMonth() + 1);
       let day = formatTime(date.getDate());
@@ -37,6 +37,10 @@ function Header(props) {
     setTime();
   },[])
 
+  const fetcher = (x) => fetch(x).then((res) => res.json());
+  const { data, error } = useSWR( `https://dertrial-api.vndirect.com.vn/demotrade/assets?username=long.nguyenphi` , fetcher, { refreshInterval: 5000 })
+  if(error) return <div></div>;
+  if(!data) return <div></div>;
 
   function formatTime(x) {
     if (x < 10) {
@@ -56,8 +60,8 @@ function Header(props) {
       <LogoTime hour={hour} day={day}/>
       <div className="header-center flex">
         <div className="profit flex">
-          <p>Lãi/Lỗ:</p> &nbsp;
-          <p className="profit-value">0</p>
+          <p>Lãi/Lỗ:</p> &nbsp; 
+          <p className="profit-value">{data.totalPnlAmount}</p>
         </div>
         <div className="pro">
           <button className="pro-link">

@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import useSWR from 'swr';
 import DayCommand from "../DayCommand/DayCommand"
 
 const styles = {
@@ -31,7 +32,9 @@ function MainRightTop(props) {
     getOrders();
   }, []);
 
-  
+  const url = `https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${userAccount.access_token.username}`;
+  const fetcher = (x) => fetch(x).then((res) => res.json);
+  const { data } = useSWR(url, fetcher, { dedupingInterval: 2000 })
 
   useEffect(()=>{getOrders(); setTrigger(!props.triggerGet)}, [props.triggerGet])
   const getOrders = async () => {
@@ -93,7 +96,6 @@ function MainRightTop(props) {
                 <a
                   href="#"
                   className="text-orange minus"
-                  onclick="closeButton('tablinks')"
                 >
                   <i className="fa fa-minus" aria-hidden="true" />
                 </a>
@@ -171,7 +173,7 @@ function MainRightTop(props) {
                   <i className="fa fa-refresh" aria-hidden="true" />
                 </a>
               </li>
-              <li onclick="closeButton('tablinks')">
+              <li>
                 <a
                   href="#"
                   className="text-orange minus"
@@ -232,7 +234,6 @@ function MainRightTop(props) {
               <a
                 href="#"
                 className="text-orange minus"
-                onclick="closeButton('tablinks')"
               >
                 <i className="fa fa-minus" aria-hidden="true" />
               </a>
@@ -254,21 +255,21 @@ function MainRightTop(props) {
           </div>
         </div>
       </TabContent>
-      <div class="command-menu double">
-        <ul class="flex">
-          <li class="tablinks" id="actionDefault">
+      <div className="command-menu double">
+        <ul className="flex">
+          <li className="tablinks" id="actionDefault">
             <a href="#">
               <TabLink default to="tab1">
                 Sổ lệnh
               </TabLink>
             </a>
           </li>
-          <li class="tablinks">
+          <li className="tablinks">
             <a href="#">
               <TabLink to="tab2">Danh mục</TabLink>
             </a>
           </li>
-          <li class="tablinks">
+          <li className="tablinks">
             <a href="#">
               <TabLink to="tab3">Tài sản</TabLink>
             </a>

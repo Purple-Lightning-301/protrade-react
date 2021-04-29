@@ -53,6 +53,7 @@ function MainRight(props) {
       }).catch((err) => {console.log(err); setTriggerGet(!triggerGet)});
     } catch (err) {
       console.log(err);
+      setTriggerGet(!triggerGet);
     }
   };
 
@@ -126,7 +127,7 @@ function MainRight(props) {
               type="radio"
               id="trailing"
               name="rad-cmd"
-              disabled="true"
+              disabled={true}
               defaultValue="command-choice"
             />
             <label htmlFor="trailing">Lệnh trailing</label>
@@ -134,7 +135,7 @@ function MainRight(props) {
               type="radio"
               id="OSO"
               name="rad-cmd"
-              disabled="true"
+              disabled={true}
               defaultValue="command-choice"
             />
             <label htmlFor="OSO">Lệnh OSO</label>
@@ -216,7 +217,7 @@ function MainRight(props) {
               type="radio"
               id="trailing"
               name="rad-cmd"
-              disabled="true"
+              disabled={true}
               defaultValue="command-choice"
             />
             <label htmlFor="trailing">Lệnh trailing</label>
@@ -224,7 +225,7 @@ function MainRight(props) {
               type="radio"
               id="OSO"
               name="rad-cmd"
-              disabled="true"
+              disabled={true}
               defaultValue="command-choice"
             />
             <label htmlFor="OSO">Lệnh OSO</label>

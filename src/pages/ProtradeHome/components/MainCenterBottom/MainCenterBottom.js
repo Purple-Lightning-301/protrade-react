@@ -57,6 +57,7 @@ function MainCenterBottom(props) {
           change={price.change}
           pctChange={price.pctChange}
           nmVolume={price.nmVolume}
+          key={price.accumulatedVal}
         />
       ))}
       {/* <div className="bottom-row grid text-white">

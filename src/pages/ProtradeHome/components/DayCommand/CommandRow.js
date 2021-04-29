@@ -46,6 +46,7 @@ function CommandRow(props) {
           }
           if (res.status == 400) {
             console.log("DELETE: OK");
+            props.setTriggerGet(!props.triggerGet)
           }
         })
         .catch((err) => {
@@ -58,7 +59,7 @@ function CommandRow(props) {
   return (
     <tr className="command-row" style={{ height: "32px" }}>
       <td className="text-green">
-        <p>{props.side === "NB" ? "MUA" : "BÁN"}</p>
+        <span>{props.side === "NB" ? <p style={{color: "#1FE71F"}}>Mua</p> : <p style={{color: "red"}}>Bán</p>}</span>
       </td>
       <td>{props.symbol}</td>
       <td>
@@ -70,27 +71,27 @@ function CommandRow(props) {
         <div className="hourglass">
           {props.status === "Filled" ? (
             <i
-              class="fa fa-check-circle"
+              className="fa fa-check-circle"
               style={{ color: "green" }}
               aria-hidden="true"
             ></i>
           ) : null}
           {props.status === "PendingNew" ? (
             <i
-              class="fa fa-hourglass"
+              className="fa fa-hourglass"
               style={{ color: "orange" }}
               aria-hidden="true"
             ></i>
           ) : null}
           {props.status === "Rejected" && confirmDelete === false ? (
             <i
-              class="fa fa-minus-circle"
+              className="fa fa-minus-circle"
               style={{ color: "red" }}
               aria-hidden="true"
             ></i>
           ) : null}
           {props.status === "Cancelled" ? (
-            <i class="fa fa-trash" style={{color: "purple"}} aria-hidden="true"></i>
+            <i className="fa fa-trash" style={{color: "purple"}} aria-hidden="true"></i>
           ) : null}
         </div>
       </td>

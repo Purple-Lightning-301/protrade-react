@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../Login/Login.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import {useCookies} from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
@@ -13,6 +13,10 @@ function Login(props) {
 
   const [tokenCookie, setTokenCookie] = useCookies([""]);
   const [userNameCookie, setUserNameCookie] = useCookies("");
+
+  if(Object.keys(tokenCookie).length !== 0){
+    history.push('/trang-chu')
+  }
 
   async function handlerLogin(event) {
     event.preventDefault();
@@ -37,25 +41,29 @@ function Login(props) {
         method: "POST",
         data: data,
         config,
-      }).then((res) => {
-        if (res.status == 200) {
-          console.log("Get token: OK");
-          console.log(jwt_decode(res.data.token))
-          setTokenCookie("access_token", jwt_decode(res.data.token), {path: "/"});
-          setUserNameCookie("username", jwt_decode(res.data.token).customerName, {path: "/"});
-          console.log(tokenCookie)
-          console.log(userNameCookie.username)
-          history.push("/trang-chu")
-        }
-      }).catch((err) => {
-        console.log(err)
-      });
-    } catch(err) {
-      console.log(err)
-    } 
+      })
+        .then((res) => {
+          if (res.status == 200) {
+            console.log("Get token: OK");
+            setTokenCookie("access_token", jwt_decode(res.data.token), {
+              path: "/",
+            });
+            setUserNameCookie(
+              "username",
+              jwt_decode(res.data.token).customerName,
+              { path: "/" }
+            );
+            history.push("/trang-chu");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  
   return (
     <div className="container">
       <div className="brand">
@@ -129,9 +137,25 @@ function Login(props) {
           <label htmlFor="login" autoComplete="off">
             Tên đăng nhập
           </label>
-          <input type="text" id="login" className="type" required placeholder="Tên đăng nhập" value={username} onChange={(e) => setUserName(e.target.value)} />
+          <input
+            type="text"
+            id="login"
+            className="type"
+            required
+            placeholder="Tên đăng nhập"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+          />
           <label htmlFor="login">Mật khẩu</label>
-          <input type="password" id="login" className="type" required placeholder="Mật khẩu" value={password} onChange={(e) => setPassWord(e.target.value)} />
+          <input
+            type="password"
+            id="login"
+            className="type"
+            required
+            placeholder="Mật khẩu"
+            value={password}
+            onChange={(e) => setPassWord(e.target.value)}
+          />
           <div className="checkbox">
             <input type="checkbox" />
             "Ghi nhớ trạng thái đăng nhập trên trình duyệt này"

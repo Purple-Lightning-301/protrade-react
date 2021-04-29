@@ -5,10 +5,14 @@ import { Cookies, useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function App() {
+
+
+
+function ProtradeHome() {
   const [userName, setUserName, removeUserName] = useCookies(['username']);
   const [accessToken, setAccessToken, removeAccessToken] = useCookies(['access_token']);
   const history = useHistory();
+
 
   useEffect(() => {
     console.log(accessToken);
@@ -16,6 +20,7 @@ function App() {
       history.push("/")
     }
   }, [])
+
 
   return (
     <div className="containerHome">
@@ -25,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default ProtradeHome;
