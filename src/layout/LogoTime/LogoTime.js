@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../../assets/logo.svg";
-import "../LogoTime/LogoTime.css";
 import {NavLink} from "react-router-dom";
 
 function LogoTime(props) {
@@ -19,15 +18,15 @@ function LogoTime(props) {
         <div className="menu flex">
         <ul className="flex menu-list">
           <li className="navbar">
-            <NavLink exact to="/trang-chu">
+            <NavLink exact activeClassName="active-navlink" to="/trang-chu" className="tabActive">
               Trang chủ
             </NavLink>
           </li>
           <li className="navbar">
-            <NavLink exact to="/tai-san">Tài sản</NavLink>
+            <NavLink exact activeClassName="active-navlink" to="/tai-san">Tài sản</NavLink>
           </li>
           <li className="navbar">
-            <NavLink exact to="/huong-dan">Hướng dẫn</NavLink>
+            <NavLink exact activeClassName="active-navlink" to="/huong-dan">Hướng dẫn</NavLink>
           </li>
         </ul>
       </div>

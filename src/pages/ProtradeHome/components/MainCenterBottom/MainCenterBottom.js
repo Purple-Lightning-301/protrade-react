@@ -3,42 +3,22 @@ import "../MainCenterBottom/MainCenterBottom.css";
 import axios from "axios";
 import { useState } from "react";
 import CodePrice from "../CodePrices/CodePrice";
+import * as API from "../../../../utils/API";
 
 function MainCenterBottom(props) {
   const [priceArray, setPriceArray] = useState([]);
 
-  const getCodePrice = async () => {
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    };
-    let url = "https://finfo-api.vndirect.com.vn//v4/derivative_prices";
-
-    try {
-      return axios(url, {
-        method: "GET",
-        config,
-      })
-        .then((res) => {
-          if (res.status == 200) {
-            console.log("Get price codes: OK");
-            console.log(res.data.data);
-            setPriceArray(res.data.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err) {
-      console.log(err);
+  const getCodePrices =  async () => {
+    const response = await API.getCodePrice();
+    console.log(response);
+    if (response.status === 200){
+      console.log("GET PRICES: OK");
+      setPriceArray(response.data.data);
     }
-  };
+  }
 
   useEffect(() => {
-    getCodePrice();
+    getCodePrices();
   }, []);
 
   return (

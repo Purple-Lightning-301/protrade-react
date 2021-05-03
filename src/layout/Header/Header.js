@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Header/Header.css";
-import LogoTime from "../../components/LogoTime/LogoTime";
+import LogoTime from "../LogoTime/LogoTime";
 import {NavLink} from "react-router-dom";
 import {Cookies, useCookies} from "react-cookie";
 import useSWR from 'swr';
@@ -37,11 +37,6 @@ function Header(props) {
     setTime();
   },[])
 
-  const fetcher = (x) => fetch(x).then((res) => res.json());
-  const { data, error } = useSWR( `https://dertrial-api.vndirect.com.vn/demotrade/assets?username=long.nguyenphi` , fetcher, { refreshInterval: 5000 })
-  if(error) return <div></div>;
-  if(!data) return <div></div>;
-
   function formatTime(x) {
     if (x < 10) {
       x = "0" + x;
@@ -61,7 +56,7 @@ function Header(props) {
       <div className="header-center flex">
         <div className="profit flex">
           <p>Lãi/Lỗ:</p> &nbsp; 
-          <p className="profit-value">{data.totalPnlAmount}</p>
+          <p className="profit-value">1.000.000</p>
         </div>
         <div className="pro">
           <button className="pro-link">

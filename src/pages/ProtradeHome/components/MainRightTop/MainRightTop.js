@@ -4,9 +4,10 @@ import "../MainRightTop/MainRightTop.css";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
-import useSWR from 'swr';
-import DayCommand from "../DayCommand/DayCommand"
+import { connect, useDispatch, useSelector } from "react-redux";
+import {FetchOrderBooks} from "../../../../redux/actions/index"
+import DayCommand from "../DayCommand/DayCommand";
+import * as API from "../../../../utils/API";
 
 const styles = {
   activeLinkStyle: {
@@ -32,39 +33,22 @@ function MainRightTop(props) {
     getOrders();
   }, []);
 
-  const url = `https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${userAccount.access_token.username}`;
-  const fetcher = (x) => fetch(x).then((res) => res.json);
-  const { data } = useSWR(url, fetcher, { dedupingInterval: 2000 })
-
   useEffect(()=>{getOrders(); setTrigger(!props.triggerGet)}, [props.triggerGet])
-  const getOrders = async () => {
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    };
-    let url = `https://dertrial-api.vndirect.com.vn/demotrade/orders?username=${userAccount.access_token.username}`;
 
-    try {
-      return axios(url, {
-        method: "GET",
-        config,
-      }).then((res) => {
-        if(res.status == 200){
-          console.log(res.data);
-          if(res.data.length > 0){
-            setCheckDayCommand(true)
-            setOrderData(res.data)
-          }
-        }
-      });
-    } catch (err) {
-      console.log(err);
+  const dispatch = useDispatch();
+  const orderBooks = useSelector( state => state.orderBooks);  
+
+  const getOrders = async () => {
+    const response = await API.getOrderBook(userAccount.access_token.username);
+    if(response.status === 200){
+      if(response.data.length > 0){
+        setCheckDayCommand(true);
+        setOrderData(response.data)
+        console.log("Get order done")
+      }
     }
-    console.log(useracc);
   };
+  
   return (
     <Tabs activeLinkStyle={containerStyles.activeLinkStyle}>
       <TabContent for="tab1">
@@ -119,7 +103,7 @@ function MainRightTop(props) {
               </tbody>
             </table>
             <div className="cm-tab1-data" style={{overflow: "auto"}}>
-            {checkDayCommand && <DayCommand triggerGet={props.triggerGet} setTriggerGet={props.setTriggerGet} orderData={orderData}/>}
+            {checkDayCommand && <DayCommand triggerGet={props.triggerGet} setTriggerGet={props.setTriggerGet}/>}
             {!checkDayCommand && <div style={{color: "#777", textAlign: "center", marginTop: "20px"}}>Chưa có lệnh nào trong sổ lệnh</div>}
             </div>
           </TabContent>
@@ -278,6 +262,18 @@ function MainRightTop(props) {
       </div>
     </Tabs>
   );
+}
+
+const mapStateToProps = state => {
+  return {
+    orderBooks: state.orderBooks
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    FetchOrderBooks: () => dispatch(FetchOrderBooks())
+  }
 }
 
 export default MainRightTop;

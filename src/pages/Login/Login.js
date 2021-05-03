@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Cookies, useCookies } from "react-cookie";
 import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
+import * as API from "../../utils/API";
 
 function Login(props) {
   const [username, setUserName] = useState("");
@@ -14,55 +15,24 @@ function Login(props) {
   const [tokenCookie, setTokenCookie] = useCookies([""]);
   const [userNameCookie, setUserNameCookie] = useCookies("");
 
-  if(Object.keys(tokenCookie).length !== 0){
-    history.push('/trang-chu')
+  if (Object.keys(tokenCookie).length !== 0) {
+    history.push("/trang-chu");
   }
 
-  async function handlerLogin(event) {
-    event.preventDefault();
-    console.log("login clicked");
-
-    const data = {
-      username: username,
-      password: password,
-    };
-
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    };
-    let url = "https://auth-api.vndirect.com.vn/v2/auth";
-
-    try {
-      return axios(url, {
-        method: "POST",
-        data: data,
-        config,
-      })
-        .then((res) => {
-          if (res.status == 200) {
-            console.log("Get token: OK");
-            setTokenCookie("access_token", jwt_decode(res.data.token), {
-              path: "/",
-            });
-            setUserNameCookie(
-              "username",
-              jwt_decode(res.data.token).customerName,
-              { path: "/" }
-            );
-            history.push("/trang-chu");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err) {
-      console.log(err);
+  const handlerLogin = async (event) => {
+    const response = await API.handlerLogin(event, username, password);
+    console.log(response.data);
+    if (response.status === 200) {
+      console.log("GET TOKEN: OK");
+      setTokenCookie("access_token", jwt_decode(response.data.token), {
+        path: "/",
+      });
+      setUserNameCookie("username", jwt_decode(response.data.token).customerName, {
+        path: "/",
+      });
+      history.push("/trang-chu");
     }
-  }
+  };
 
   return (
     <div className="container">

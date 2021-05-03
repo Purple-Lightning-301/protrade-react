@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "../MainRight/MainRight.css";
-import CommandHeader from "../CommandHeader/CommandHeader";
 import MainRightTop from "../MainRightTop/MainRightTop";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import * as API from "../../../../utils/API";
+import { useDispatch} from "react-redux";
+import {FetchOrderBooks} from "../../../../redux/actions/index"
 
 function MainRight(props) {
   const [buyCode, setBuyCode] = useState("");
@@ -13,90 +15,23 @@ function MainRight(props) {
   const [accessToken, setAccessToken, removeAccessToken] = useCookies([
     "access_token",
   ]);
-
+  const username = accessToken.access_token.username;
+  const dispatch = useDispatch();
   const [showNormal, setShowNormal] = useState(true);
   const [showStop, setShowStop] = useState(false);
 
-  const handlerBuy = async () => {
-    console.log("clicked")
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    };
-    let url = "https://dertrial-api.vndirect.com.vn/demotrade/orders";
-    const data = {
-      side: "NB",
-      symbol: buyCode,
-      priceType: orderPrice,
-      quantity: orderQuantity,
-      price: 0,
-      userName: accessToken.access_token.username,
-    };
-    console.log(orderQuantity)
-    try {
-      return axios(url, {
-        method: "POST",
-        data: data,
-        config,
-      }).then((res) => {
-        if(res.status == 200){
-          console.log("Send order: OK")
-          setTriggerGet(!triggerGet)
-        }
-        if(res.status == 400){
-          console.log("still work")
-          setTriggerGet(!triggerGet)
-        }
-      }).catch((err) => {console.log(err); setTriggerGet(!triggerGet)});
-    } catch (err) {
-      console.log(err);
-      setTriggerGet(!triggerGet);
-    }
-  };
+  const handlerOrderBuy = async () => {
+    const response = await API.handlerOrder(username, "NB", buyCode, orderPrice, orderQuantity)
+    console.log(response);
+    dispatch(FetchOrderBooks(username))
+  }
 
-  
-  const handlerSell = async () => {
-    console.log("clicked")
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    };
-    let url = "https://dertrial-api.vndirect.com.vn/demotrade/orders";
-    const data = {
-      side: "NS",
-      symbol: buyCode,
-      priceType: orderPrice,
-      quantity: orderQuantity,
-      price: 0,
-      userName: accessToken.access_token.username,
-    };
-    console.log(orderQuantity)
-    try {
-      return axios(url, {
-        method: "POST",
-        data: data,
-        config,
-      }).then((res) => {
-        if(res.status == 200){
-          console.log("Send order: OK")
-          setTriggerGet(!triggerGet)
-        }
-        if(res.status == 400){
-          console.log("still work")
-          setTriggerGet(!triggerGet)
-        }
-      }).catch((err) => {console.log(err); setTriggerGet(!triggerGet)});
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  console.log(accessToken.access_token.username);
+  const handlerOrderSell = async () => {
+    const response = await API.handlerOrder(username, "NS", buyCode, orderPrice, orderQuantity)
+    console.log(response);
+    dispatch(FetchOrderBooks(username))
+  }
+
   return (
     <div className="main-right grid">
       <MainRightTop triggerGet = {triggerGet} setTriggerGet={setTriggerGet} />
@@ -178,8 +113,8 @@ function MainRight(props) {
               <br />
             </div>
             <div className="confirm-command">
-              <button className="buy-btn" onClick={handlerBuy}>MUA</button>
-              <button className="sell-btn" onClick={handlerSell}>BÁN</button>
+              <button className="buy-btn" onClick={handlerOrderBuy}>MUA</button>
+              <button className="sell-btn" onClick={handlerOrderSell}>BÁN</button>
               <input
                 type="checkbox"
                 id="save"

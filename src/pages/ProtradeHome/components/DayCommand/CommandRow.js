@@ -2,60 +2,35 @@ import React from "react";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import * as API from "../../../../utils/API"; 
+import {useDispatch} from "react-redux";
+import {FetchOrderBooks} from "../../../../redux/actions/index";
 
 function CommandRow(props) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [accessToken] = useCookies("access_token");
+  const dispatch = useDispatch();
 
   const handlerCancelOrder = () => {
     setConfirmDelete(true);
-    console.log(accessToken.access_token.username);
-    console.log(props.orderID);
   };
 
   const handlerCancel = () => {
     setConfirmDelete(false);
   };
 
-  const handlerConfirm = async () => {
-    console.log(props.orderData);
-    let data = {
-      orderID: props.orderID,
-      userName: accessToken.access_token.username,
-    };
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    };
-    let url = "https://dertrial-api.vndirect.com.vn/demotrade/orders";
-    try {
-      return axios(url, {
-        method: "DELETE",
-        data: data,
-        config,
-      })
-        .then((res) => {
-          console.log(res);
-          if (res.status == 200) {
-            console.log("DELETE: OK");
-            props.setTriggerGet(!props.triggerGet)
-            setConfirmDelete(false)
-          }
-          if (res.status == 400) {
-            console.log("DELETE: OK");
-            props.setTriggerGet(!props.triggerGet)
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (err) {
-      console.log(err);
+  const cancelOrder = async () => {
+    const response = await API.handlerCancelOrder(props.orderID, accessToken.access_token.username);
+    if(response.status === 200){
+      console.log("DELETE: OK");
+      dispatch(FetchOrderBooks(accessToken.access_token.username))
     }
-  };
+    if(response.status === 400){
+      console.log("DELETE: OK");
+      dispatch(FetchOrderBooks(accessToken.access_token.username))
+    }
+  }
+
   return (
     <tr className="command-row" style={{ height: "32px" }}>
       <td className="text-green">
@@ -107,7 +82,7 @@ function CommandRow(props) {
         {confirmDelete === true ? (
           <span>
             <button
-              onClick={handlerConfirm}
+              onClick={cancelOrder}
               style={{
                 width: "40px",
                 backgroundColor: "orange",
