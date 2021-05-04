@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./MainLeft.css";
-import TopLeftChart from "../TopLeft/TopLeft";
+import Chart from "../Chart/Chart";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
-import BottomLeft from "../../components/BottomLeft/BottomLeft"
+import Market from "../../components/Market/Market";
 
 function MainLeft(props) {
   return (
     <div className="main-left grid">
-      <TopLeftChart />
-      <BottomLeft/>
+      <Chart />
+      <Market/>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 import React from "react";
 import { Tabs, TabLink, TabContent } from "react-tabs-redux";
-import "../MainRightTop/MainRightTop.css";
+import "../OrderBook/OrderBook.css";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import {FetchOrderBooks} from "../../../../redux/actions/index"
 import DayCommand from "../DayCommand/DayCommand";
-import * as API from "../../../../utils/API";
+import * as API from "../../../../apis/API";
 
 const styles = {
   activeLinkStyle: {

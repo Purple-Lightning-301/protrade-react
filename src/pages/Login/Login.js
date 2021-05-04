@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Cookies, useCookies } from "react-cookie";
 import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
-import * as API from "../../utils/API";
+import * as API from "../../apis/API";
 
 function Login(props) {
   const [username, setUserName] = useState("");

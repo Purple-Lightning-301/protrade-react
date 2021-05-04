@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../MainRight/MainRight.css";
-import MainRightTop from "../MainRightTop/MainRightTop";
+import OrderBook from "../OrderBook/OrderBook";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import * as API from "../../../../utils/API";
+import * as API from "../../../../apis/API";
 import { useDispatch} from "react-redux";
 import {FetchOrderBooks} from "../../../../redux/actions/index"
 
@@ -34,7 +34,7 @@ function MainRight(props) {
 
   return (
     <div className="main-right grid">
-      <MainRightTop triggerGet = {triggerGet} setTriggerGet={setTriggerGet} />
+      <OrderBook triggerGet = {triggerGet} setTriggerGet={setTriggerGet} />
       <div className="command-option">
         { showNormal === true ? <div className="command-filter text-white">
           <div className="radius-command">

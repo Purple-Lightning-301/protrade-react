@@ -1,6 +1,6 @@
 import * as Types from "../../constants/ActionTypes";
 import { useCookies } from "react-cookie";
-import * as API from "../../utils/API";
+import * as API from "../../apis/API";
 
 export const OrderBookFetchRequest = () => {
   return {

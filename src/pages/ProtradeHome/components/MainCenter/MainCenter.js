@@ -1,13 +1,13 @@
 import React from "react";
 import "../MainCenter/MainCenter.css";
-import MainCenterTop from "../MainCenterTop/MainCenterTop";
-import MainCenterBottom from "../MainCenterBottom/MainCenterBottom";
+import History from "../History/History";
+import WatchList from "../WatchList/WatchList";
 
 function MainCenter(props) {
   return (
     <div className="main-center grid">
-      <MainCenterTop/>
-      <MainCenterBottom/>
+      <History/>
+      <WatchList/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
-import "../MainCenterTop/MainCenterTop.css"
+import "./History.css"
 
-function MainCenterTop(props) {
+function History(props) {
   return (
     <div className="main-center-top">
       <div className="VN30tableHeader flex text-white">
@@ -165,4 +165,4 @@ function MainCenterTop(props) {
   );
 }
 
-export default MainCenterTop;
+export default History;

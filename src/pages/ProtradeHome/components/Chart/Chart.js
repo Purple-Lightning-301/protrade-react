@@ -1,7 +1,7 @@
 import React from "react";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
 
-function TopLeft(props) {
+function Chart(props) {
   return (
       <div className="chart">
         <TradingViewWidget
@@ -14,4 +14,4 @@ function TopLeft(props) {
   );
 }
 
-export default TopLeft;
+export default Chart;

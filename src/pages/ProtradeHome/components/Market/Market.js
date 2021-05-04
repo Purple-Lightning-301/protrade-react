@@ -1,5 +1,5 @@
 import React from "react";
-import "../BottomLeft/BottomLeft.css";
+import "./Market.css";
 import { Tabs, TabLink, TabContent } from "react-tabs-redux";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
 
@@ -9,7 +9,7 @@ const styles = {
   },
 };
 
-function BottomLeft(props) {
+function Market(props) {
   return (
     <Tabs
       className="dealing-data grid"
@@ -98,4 +98,4 @@ function BottomLeft(props) {
   );
 }
 
-export default BottomLeft;
+export default Market;

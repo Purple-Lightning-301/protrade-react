@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import "../MainCenterBottom/MainCenterBottom.css";
+import "./WatchList.css";
 import axios from "axios";
 import { useState } from "react";
 import CodePrice from "../CodePrices/CodePrice";
-import * as API from "../../../../utils/API";
+import * as API from "../../../../apis/API";
 
-function MainCenterBottom(props) {
+function WatchList(props) {
   const [priceArray, setPriceArray] = useState([]);
 
   const getCodePrices =  async () => {
@@ -72,4 +72,4 @@ function MainCenterBottom(props) {
   );
 }
 
-export default MainCenterBottom;
+export default WatchList;
