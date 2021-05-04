@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import { Cookies, useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import Modal from "react-modal";
 
 
 

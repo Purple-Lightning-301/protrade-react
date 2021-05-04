@@ -1,6 +1,13 @@
 import React from "react";
 import logo from "../../assets/logo.svg";
 import {NavLink} from "react-router-dom";
+import "../LogoTime/LogoTime.css";
+
+const styles = {
+  activeLinkStyle: {
+    color: "#F7941D",
+  },
+};
 
 function LogoTime(props) {
   return (

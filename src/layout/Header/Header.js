@@ -3,16 +3,33 @@ import "../Header/Header.css";
 import LogoTime from "../LogoTime/LogoTime";
 import {NavLink} from "react-router-dom";
 import {Cookies, useCookies} from "react-cookie";
-import useSWR from 'swr';
-import axios from "axios"
+import Modal from "react-modal";
+import Popup from "../Popup/Popup";
 
 function Header(props) {
 
   const [hour, setHour] = useState("")
   const [day, setDay] = useState("")
+  const [openModal, setOpenModal] = useState(false);
   const [userName, setUserName, removeUserName] = useCookies(['username']);
   const [accessToken, setAccessToken, removeAccessToken] = useCookies(['access_token']);
   const username = userName.username;
+
+  const modalStyle = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+      margin: '0px',
+      backgroundColor: '#F2F2F2',
+    },
+    overlay : {
+      position: 'auto'
+    }
+  };
   
   function setTime() {
     setInterval(() => {
@@ -63,7 +80,7 @@ function Header(props) {
             <span className="pro-icon">
               <i className="fa fa-trophy" aria-hidden="true" />
             </span>
-            <a href="#">Top cao thủ phái sinh</a>
+            <a onClick={() => setOpenModal(true)}>Top cao thủ phái sinh</a>
           </button>
         </div>
       </div>
@@ -93,6 +110,9 @@ function Header(props) {
           </div>
         </div>
       </div>
+      <Modal isOpen={openModal} style={modalStyle}>
+        <Popup openModal={openModal} setOpenModal={setOpenModal}/>
+      </Modal>
     </div>
   );
 }
